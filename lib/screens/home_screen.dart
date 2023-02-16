@@ -1,9 +1,7 @@
 import 'package:clock_app/helpers/clock_helper.dart';
 import 'package:clock_app/models/data_models/alarm_data_model.dart';
 import 'package:clock_app/providers/alarm_provider.dart';
-import 'package:clock_app/providers/clock_type_provider.dart';
 import 'package:clock_app/screens/components/body.dart';
-import 'package:clock_app/screens/components/spinner_widget.dart';
 import 'package:clock_app/screens/modify_alarm_screen.dart';
 import 'package:clock_app/size_config.dart';
 import 'package:flutter/material.dart';
@@ -26,56 +24,7 @@ class HomeScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSurface,
               ),
         ),
-        actions: [
-          Consumer<ClockTypeModel>(builder: (context, model, child) {
-            // ClockType.analog == true, ClockType.digial == false
-
-            final textStyle = TextStyle(
-              fontSize: 16,
-              color: Theme.of(context).colorScheme.onSurface,
-            );
-
-            return GestureDetector(
-              onTap: () {
-                model.changeType(
-                  model.clockType == ClockType.analog
-                      ? ClockType.digital
-                      : ClockType.analog,
-                );
-              },
-              child: SpinnerWidget(
-                child: model.clockType == ClockType.analog
-                    ? SizedBox(
-                        key: const ValueKey('Analog'),
-                        width: 100,
-                        child: Center(
-                          child: TextIcon(
-                            child: Text(
-                              'Analog',
-                              style: textStyle,
-                            ),
-                            svgPath: 'assets/icons/analog-clock.svg',
-                          ),
-                        ),
-                      )
-                    : SizedBox(
-                        key: const ValueKey('Digital'),
-                        width: 100,
-                        child: Center(
-                          child: TextIcon(
-                            child: Text(
-                              'Digital',
-                              style: textStyle,
-                            ),
-                            svgPath: 'assets/icons/digital-clock.svg',
-                          ),
-                        ),
-                      ),
-                withShader: false,
-              ),
-            );
-          }),
-        ],
+        actions: [],
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -100,7 +49,7 @@ class _AlarmScheetState extends State<AlarmScheet>
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
   late AnimationController _controller;
-  Animation<double>? animation;
+
   bool expanded = false;
 
   @override
@@ -112,24 +61,9 @@ class _AlarmScheetState extends State<AlarmScheet>
       )..addListener(() {
           setState(() {});
         });
-
-      animation = Tween(
-        begin: getSmallSize(),
-        end: getBigSize(),
-      ).animate(CurvedAnimation(
-        parent: _controller,
-        curve: Curves.decelerate,
-      ));
     });
 
     super.initState();
-  }
-
-  double getBigSize() => MediaQuery.of(context).size.height * .8;
-
-  double getSmallSize() {
-    return MediaQuery.of(context).size.height * .8 -
-        MediaQuery.of(context).size.width;
   }
 
   @override
@@ -141,7 +75,6 @@ class _AlarmScheetState extends State<AlarmScheet>
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: animation?.value ?? getSmallSize(),
       child: Selector<AlarmModel, AlarmModel>(
         shouldRebuild: (previous, next) {
           if (next.state is AlarmCreated) {
@@ -167,18 +100,6 @@ class _AlarmScheetState extends State<AlarmScheet>
           return Column(
             children: [
               GestureDetector(
-                onVerticalDragUpdate: (details) {
-                  if ((details.primaryDelta ?? 0) < 0 && !expanded) {
-                    // dragging up, expand
-                    _controller.forward();
-                  } else if ((details.primaryDelta ?? 0) > 0 && expanded) {
-                    // dragging up, expand
-                    _controller.reverse();
-                  }
-                  setState(() {
-                    expanded = !expanded;
-                  });
-                },
                 child: Container(
                   width: double.infinity,
                   color: Colors.transparent,
