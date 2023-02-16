@@ -65,9 +65,7 @@ class _ModifyAlarmScreenState extends State<ModifyAlarmScreen> {
           SizedBox(
             height: 150,
             child: CupertinoTheme(
-              data: CupertinoThemeData(
-                brightness: Theme.of(context).brightness,
-              ),
+              data: CupertinoThemeData(),
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.time,
                 onDateTimeChanged: (value) {

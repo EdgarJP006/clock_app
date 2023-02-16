@@ -4,7 +4,6 @@ import 'package:clock_app/providers/alarm_provider.dart';
 import 'package:clock_app/providers/clock_type_provider.dart';
 import 'package:clock_app/providers/theme_provider.dart';
 import 'package:clock_app/screens/modify_alarm_screen.dart';
-import 'package:clock_app/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -117,8 +116,6 @@ class _MyAppState extends State<MyApp> {
           builder: (context, theme, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Analog Clock',
-            theme: themeData(context),
-            darkTheme: darkThemeData(context),
             themeMode: theme.isLightTheme ? ThemeMode.light : ThemeMode.dark,
             builder: (context, child) {
               return child ?? Container();
