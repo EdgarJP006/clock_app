@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:clock_app/providers/alarm_provider.dart';
-import 'package:clock_app/providers/clock_type_provider.dart';
-import 'package:clock_app/providers/theme_provider.dart';
 import 'package:clock_app/screens/modify_alarm_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -104,28 +102,27 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => ThemeModel()),
-          ChangeNotifierProvider(create: (context) => ClockTypeModel()),
+          //Llama a la modelo de la alarma
           ChangeNotifierProvider(
             create: (context) => AlarmModel(
               const AlarmsHiveLocalStorage(),
             ),
           ),
         ],
-        child: Consumer<ThemeModel>(
+        child: Consumer(
           builder: (context, theme, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Analog Clock',
-            themeMode: theme.isLightTheme ? ThemeMode.light : ThemeMode.dark,
             builder: (context, child) {
               return child ?? Container();
             },
             onGenerateRoute: (settings) {
               switch (settings.name) {
+                //aqui llamo a la lsita de alarmas hechas
                 case '/':
                   return MaterialPageRoute(
                     builder: (context) => const HomeScreen(),
                   );
+                //configuraciòn para una nueva alarma
                 case ModifyAlarmScreen.routeName:
                   return MaterialPageRoute(
                     builder: (context) => ModifyAlarmScreen(
