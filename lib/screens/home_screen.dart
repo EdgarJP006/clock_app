@@ -2,7 +2,6 @@ import 'package:clock_app/helpers/clock_helper.dart';
 import 'package:clock_app/models/data_models/alarm_data_model.dart';
 import 'package:clock_app/providers/alarm_provider.dart';
 import 'package:clock_app/screens/modify_alarm_screen.dart';
-import 'package:clock_app/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // we have to call this on our starting page
-    SizeConfig().init(context);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -23,7 +22,7 @@ class HomeScreen extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
           ),
-          actions: [],
+          actions: const [],
         ),
         body: const Padding(
           padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -51,7 +50,7 @@ class _AlarmScheetState extends State<AlarmScheet>
 
   @override
   void initState() {
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _controller = AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 200),
