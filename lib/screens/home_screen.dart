@@ -1,7 +1,6 @@
 import 'package:clock_app/helpers/clock_helper.dart';
 import 'package:clock_app/models/data_models/alarm_data_model.dart';
 import 'package:clock_app/providers/alarm_provider.dart';
-import 'package:clock_app/screens/components/body.dart';
 import 'package:clock_app/screens/modify_alarm_screen.dart';
 import 'package:clock_app/size_config.dart';
 import 'package:flutter/material.dart';
@@ -16,22 +15,20 @@ class HomeScreen extends StatelessWidget {
     // we have to call this on our starting page
     SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text(
-          'Clock',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
+        appBar: AppBar(
+          centerTitle: false,
+          title: Text(
+            'Clock',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+          ),
+          actions: [],
         ),
-        actions: [],
-      ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        child: Body(),
-      ),
-      bottomSheet: const AlarmScheet(),
-    );
+        body: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: AlarmScheet(),
+        ));
   }
 }
 
