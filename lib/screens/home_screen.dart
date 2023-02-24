@@ -225,31 +225,3 @@ class CardAlarmItem extends StatelessWidget {
     );
   }
 }
-
-class TextIcon extends StatelessWidget {
-  final Widget child;
-  final String svgPath;
-
-  const TextIcon({
-    Key? key,
-    required this.child,
-    required this.svgPath,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          svgPath,
-          width: 20,
-          height: 30,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        const SizedBox(width: 8),
-        child,
-      ],
-    );
-  }
-}

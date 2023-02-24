@@ -14,21 +14,22 @@ import 'models/alarm_hive_storage.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  //ya
+  WidgetsFlutterBinding.ensureInitialized(); // ya
 
-  runApp(const MyApp());
+  runApp(const MyApp()); //ya
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key); //yA
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState(); //YA
 }
 
 class _MyAppState extends State<MyApp> {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin(); //ya
 
   @override
   void initState() {
